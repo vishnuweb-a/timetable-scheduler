@@ -37,7 +37,11 @@ function animateCharacters(node: React.ReactNode, keyPrefix = "char"): React.Rea
   }
 
   if (Array.isArray(node)) {
-    return node.map((child, index) => animateCharacters(child, `${keyPrefix}-${index}`));
+    return node.map((child, index) => (
+      <React.Fragment key={`${keyPrefix}-${index}`}>
+        {animateCharacters(child, `${keyPrefix}-${index}`)}
+      </React.Fragment>
+    ));
   }
 
   if (React.isValidElement<{ children?: React.ReactNode }>(node) && node.type !== "br") {
